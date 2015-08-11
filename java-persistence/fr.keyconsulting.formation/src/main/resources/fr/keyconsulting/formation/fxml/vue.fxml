@@ -44,12 +44,12 @@
 						<Button mnemonicParsing="false" onAction="#run" text="Lancer" />
 					</children>
 					<padding>
-						<Insets left="10.0" top="10.0" />
+						<Insets left="10.0" top="10.0"/>
 					</padding>
 				</HBox>
-				<HBox fx:id="hboxTable" prefWidth="200.0" visible="true">
+				<HBox fx:id="hboxTable" prefWidth="450.0" visible="true">
 					<children>
-						<TableView fx:id="tableView" prefHeight="150.0">
+						<TableView fx:id="tableView" prefHeight="700.0">
 							<columns>
 								<TableColumn minWidth="100.0" prefWidth="75.0" text="Nom"
 									fx:id="columnNom">
@@ -70,6 +70,9 @@
 							</columns>
 						</TableView>
 					</children>
+					<padding>
+						<Insets left="10.0" top="30.0"/>
+					</padding>
 				</HBox>
 			</children>
 		</VBox>

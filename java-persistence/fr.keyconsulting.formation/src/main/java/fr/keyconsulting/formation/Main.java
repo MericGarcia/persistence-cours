@@ -17,7 +17,10 @@ public class Main extends Application {
         primaryStage.setWidth(1024);
         primaryStage.setHeight(968);
         primaryStage.setTitle("KC JavaFX");
-    	primaryStage.setScene(new Scene((Parent) JfxUtils.loadFxml("/fr/keyconsulting/formation/fxml/vue.fxml"), 1024, 968));
+        Scene scene = new Scene((Parent) JfxUtils.loadFxml("/fr/keyconsulting/formation/fxml/vue.fxml"), 1024, 968);
+        scene.getStylesheets().add("/fr/keyconsulting/formation/css/style.css");
+    	primaryStage.setScene(scene);
+    	
         primaryStage.show();
     }
 

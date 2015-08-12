@@ -1,4 +1,4 @@
-package fr.keyconsulting.formation;
+package fr.keyconsulting.formation.util;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

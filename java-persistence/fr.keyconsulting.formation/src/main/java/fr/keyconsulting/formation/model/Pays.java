@@ -15,6 +15,7 @@ public class Pays {
 		this.population = population;
 		this.pib = pib;
 	}
+	
 	public String getNom() {
 		return nom;
 	}

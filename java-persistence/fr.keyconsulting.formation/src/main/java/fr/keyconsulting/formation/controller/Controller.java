@@ -1,4 +1,4 @@
-package fr.keyconsulting.formation;
+package fr.keyconsulting.formation.controller;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -36,38 +36,10 @@ public class Controller implements Initializable {
 	final ObservableList<Pays> items = FXCollections.observableArrayList();;
 
 	public void initialize(URL location, ResourceBundle resources) {
-		TableColumn<Pays, String> btnCol = new TableColumn();
+		TableColumn<Pays, String> btnCol = new TableColumn<>();
 		btnCol.setMinWidth(140);
 		tableView.getColumns().add(btnCol);
-		btnCol.setCellFactory(new Callback<TableColumn<Pays, String>, TableCell<Pays, String>>() {
-
-			@Override
-			public TableCell call(final TableColumn param) {
-
-				final TableCell cell = new TableCell() {
-
-					@Override
-					public void updateItem(Object item, boolean empty) {
-						super.updateItem(item, empty);
-						final Button button = new Button("Delete");
-						button.setMinWidth(130);
-						button.setOnAction(new EventHandler<ActionEvent>() {
-
-							@Override
-							public void handle(ActionEvent event) {
-								param.getTableView().getItems().remove(getIndex());
-							}
-	                       
-	                            
-						});
-						setGraphic(button);
-						setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-
-					}
-				};
-				return cell;
-			}
-		});
+		btnCol.setCellFactory(new ButtonCellFactory("Delete",80));
 	}
 
 	public void run(ActionEvent event) {
@@ -75,9 +47,44 @@ public class Controller implements Initializable {
 		tableView.setItems(items);
 	};
 
-	public void del(ActionEvent event) {
-		items.remove(event.getSource());
-		tableView.setItems(items);
-	};
+	private final class ButtonCellFactory implements Callback<TableColumn<Pays, String>, TableCell<Pays, String>> {
 
+		int width;
+		String text;
+		
+		public ButtonCellFactory(String text,int width) {
+			this.width = width;
+			this.text = text;
+		}
+		
+		@Override
+		public TableCell<Pays, String> call(final TableColumn<Pays, String> param) {
+
+			final TableCell<Pays, String> cell = new TableCell<Pays, String>() {
+
+				@Override
+				public void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+					if (!empty) {
+						final Button button = new Button(text);
+						button.setMinWidth(width);
+						button.setOnAction(new EventHandler<ActionEvent>() {
+
+							@Override
+							public void handle(ActionEvent event) {
+								param.getTableView().getItems().remove(getIndex());
+							}
+
+						});
+						setGraphic(button);
+						setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+					} else {
+						setGraphic(null);
+					}
+
+				}
+			};
+			return cell;
+		}
+	}
 }

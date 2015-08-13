@@ -8,9 +8,10 @@ import java.util.ResourceBundle;
 import fr.keyconsulting.formation.model.PIB;
 import fr.keyconsulting.formation.model.Pays;
 import fr.keyconsulting.formation.model.Population;
+import fr.keyconsulting.formation.service.ApplicationContextUtils;
+import fr.keyconsulting.formation.service.PersistenceService;
 import fr.keyconsulting.formation.util.JfxUtils;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -38,12 +39,16 @@ public class Controller implements Initializable {
 	@FXML
 	private TableView<Pays> tableView;
 
+	PersistenceService persistenceService;
+	
 	public void initialize(URL location, ResourceBundle resources) {
 		TableColumn<Pays, String> btnCol = new TableColumn<>();
 		btnCol.setMinWidth(140);
 		tableView.getColumns().add(btnCol);
 		btnCol.setCellFactory(new ButtonCellFactory("Delete",80));
 		tableView.setItems(FXCollections.observableArrayList());
+		persistenceService = ApplicationContextUtils.getPersistenceService();
+		
 	}
 
 	public void run(ActionEvent event) {

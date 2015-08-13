@@ -4,6 +4,8 @@
 .project
 .metadata
 .checkstyle
+.recommenders
+RemoteSystemsTempFiles
 
 *.pydevproject
 bin/
@@ -94,3 +96,45 @@ Thumbs.db
 
 #generated files
 Tools/aspirator/dependency-reduced-pom.xml
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/
+/target/

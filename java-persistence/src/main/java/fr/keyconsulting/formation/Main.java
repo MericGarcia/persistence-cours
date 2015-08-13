@@ -1,5 +1,8 @@
 package fr.keyconsulting.formation;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import fr.keyconsulting.formation.util.JfxUtils;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -9,6 +12,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
  
     public static void main(String[] args) {
+    	ApplicationContext context = 
+    	            new ClassPathXmlApplicationContext("Spring-context.xml");
         launch(args);
     }
  

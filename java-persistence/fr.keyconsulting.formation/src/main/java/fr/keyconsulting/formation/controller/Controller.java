@@ -2,11 +2,16 @@ package fr.keyconsulting.formation.controller;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
+import fr.keyconsulting.formation.model.PIB;
 import fr.keyconsulting.formation.model.Pays;
+import fr.keyconsulting.formation.model.Population;
+import fr.keyconsulting.formation.util.JfxUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -33,18 +38,28 @@ public class Controller implements Initializable {
 	@FXML
 	private TableView<Pays> tableView;
 
-	final ObservableList<Pays> items = FXCollections.observableArrayList();;
-
 	public void initialize(URL location, ResourceBundle resources) {
 		TableColumn<Pays, String> btnCol = new TableColumn<>();
 		btnCol.setMinWidth(140);
 		tableView.getColumns().add(btnCol);
 		btnCol.setCellFactory(new ButtonCellFactory("Delete",80));
+		tableView.setItems(FXCollections.observableArrayList());
 	}
 
 	public void run(ActionEvent event) {
-		items.add(new Pays(code.getText(), Integer.valueOf(population.getText()), new BigDecimal(pib.getText())));
-		tableView.setItems(items);
+		FilteredList<Pays> paysList = tableView.getItems().filtered(p -> p.getNom().equals(code.getText()));
+		Pays pays;
+		if(paysList.size() > 0){
+			pays = paysList.get(0);
+			pays.getPopulationHistory().add(new Population(Integer.valueOf(population.getText()), LocalDateTime.now()));
+			pays.getPibHistory().add(new PIB(new BigDecimal(pib.getText()), LocalDateTime.now()));
+			
+		}else{
+			pays = new Pays(code.getText(), Integer.valueOf(population.getText()), new BigDecimal(pib.getText()));
+			tableView.getItems().add(pays);
+		}
+
+		JfxUtils.refreshTableView(tableView);
 	};
 
 	private final class ButtonCellFactory implements Callback<TableColumn<Pays, String>, TableCell<Pays, String>> {

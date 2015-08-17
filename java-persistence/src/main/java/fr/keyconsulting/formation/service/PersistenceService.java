@@ -1,10 +1,13 @@
 package fr.keyconsulting.formation.service;
 
-import org.springframework.stereotype.Component;
+import java.util.List;
 
-@Component(value="persistenceService")
-public class PersistenceService {
+import fr.keyconsulting.formation.model.Calcul;
+
+public interface PersistenceService {
 	
+	public void persist(Calcul calcul);
 	
+	public List<Calcul> load();
 
 }

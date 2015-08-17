@@ -1,0 +1,5 @@
+<aspectj>
+    <aspects>
+        <aspect name="fr.keyconsulting.formation.aspect.LogAspect"/>
+    </aspects>
+</aspectj>

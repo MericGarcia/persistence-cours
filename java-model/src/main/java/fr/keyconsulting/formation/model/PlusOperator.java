@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 @Entity
 public class PlusOperator extends Operator {
 
+	private static final long serialVersionUID = 1L;
+
 	private static final String PLUS = "+";
 
 	@Override

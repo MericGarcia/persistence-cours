@@ -4,11 +4,12 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import javax.persistence.Entity;
-import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 public class DivideOperator extends Operator {
 
+	private static final long serialVersionUID = 1L;
+	
 	private static final String DIVIDE = "/";
 	private static int SCALE = 10;
 

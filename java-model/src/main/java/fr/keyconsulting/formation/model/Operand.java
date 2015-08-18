@@ -9,23 +9,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Operand implements Serializable{
-	
+public class Operand implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	private BigDecimal value;
-	
-	public Operand(){
-		
+
+	public Operand() {
+		super();
 	}
-	
-	public Operand(String operandAsText){
+
+	public Operand(String operandAsText) {
 		this.value = new BigDecimal(operandAsText);
 	}
-	
-	public Operand(BigDecimal value){
+
+	public Operand(BigDecimal value) {
 		this.value = value;
 	}
 

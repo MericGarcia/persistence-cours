@@ -19,7 +19,7 @@ final class DateTimeCellFactory<T>
 			protected void updateItem(LocalDateTime item, boolean empty) {
 				super.updateItem(item, empty);
 				if (!empty) {
-					setText(item.format(DateTimeFormatter.ofPattern("d MMM uuuu HH mm ss")));
+					setText(item.format(DateTimeFormatter.ofPattern("d MMM uuuu HH:mm:ss")));
 				} else {
 					setText(null);
 				}

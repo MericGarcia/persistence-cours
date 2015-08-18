@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.util.StringJoiner;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +14,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @Entity
 public class Calcul implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

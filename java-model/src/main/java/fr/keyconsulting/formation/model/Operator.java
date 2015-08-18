@@ -16,6 +16,8 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 @XmlSeeAlso({PlusOperator.class,MinusOperator.class,DivideOperator.class,MultiplyOperator.class})
 public abstract class Operator implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;

@@ -7,7 +7,8 @@
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 
-<AnchorPane prefHeight="968.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.keyconsulting.formation.controller.Controller">
+<AnchorPane prefHeight="968.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
+fx:controller="fr.keyconsulting.formation.controller.Controller">
 	<children>
 		<VBox>
 			<children>

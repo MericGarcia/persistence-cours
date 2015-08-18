@@ -1,5 +1,6 @@
 package fr.keyconsulting.formation.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
@@ -13,7 +14,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @XmlSeeAlso({PlusOperator.class,MinusOperator.class,DivideOperator.class,MultiplyOperator.class})
-public abstract class Operator {
+public abstract class Operator implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

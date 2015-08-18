@@ -37,12 +37,9 @@ public class Controller implements Initializable {
 
 	@FXML
 	private TableColumn<Calcul, LocalDateTime> time;
-	
-	private JmsServiceHelper persister;
 
 	public void initialize(URL location, ResourceBundle resources) {
 		operator.setItems(FXCollections.observableArrayList(Operators.all()));
-		persister = new JmsServiceHelper();
 		tableView.setItems(FXCollections.observableArrayList());
 		time.setCellFactory(new DateTimeCellFactory<Calcul>());
 	}
@@ -51,7 +48,6 @@ public class Controller implements Initializable {
 		Calcul calcul = new Calcul(new Operand(leftOperand.getText()), Operators.of(operator.getValue()),
 				new Operand(rightOperand.getText()));
 		tableView.getItems().add(calcul);
-		persister.send(calcul);
 		result.setText(calcul.execute().getValue().toPlainString());
 	}
 

@@ -9,6 +9,7 @@ public class FxApplication extends Application {
 	
 	public static void launch(ApplicationView appView, String[] args) {
 		appCurrentView = appView;
+		//start the JavaFX toolkit and call start(Stage primaryStage)
 		launch(args);
 	}
 

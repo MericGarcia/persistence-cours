@@ -1,6 +1,6 @@
-package fr.keyconsulting.formation.controller.app;
+package fr.keyconsulting.formation.control.app;
 
-import fr.keyconsulting.formation.controller.IController;
+import fr.keyconsulting.formation.control.IController;
 import fr.keyconsulting.formation.model.Calcul;
 import fr.keyconsulting.formation.model.Result;
 
@@ -11,5 +11,7 @@ public interface IApplicationCtrl extends IController {
 	public Calcul createNewCalcul(String operandA, String operatorSymbol, String operandB);
 	
 	public Result compute(Calcul operation);
+	
+	public void handleException(Exception err);
 
 }

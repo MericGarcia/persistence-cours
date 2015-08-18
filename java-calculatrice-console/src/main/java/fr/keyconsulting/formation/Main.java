@@ -1,7 +1,7 @@
 package fr.keyconsulting.formation;
 
-import fr.keyconsulting.formation.controller.app.IApplicationCtrl;
-import fr.keyconsulting.formation.controller.app.ViewApplicationCtrl;
+import fr.keyconsulting.formation.control.app.IApplicationCtrl;
+import fr.keyconsulting.formation.control.app.ViewApplicationCtrl;
 
 public class Main {
  

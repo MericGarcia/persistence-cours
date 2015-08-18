@@ -1,11 +1,20 @@
 package fr.keyconsulting.formation.view.app;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
-import fr.keyconsulting.formation.controller.app.IApplicationCtrl;
+import fr.keyconsulting.formation.control.app.IApplicationCtrl;
 import fr.keyconsulting.formation.presentation.IPresentation;
-import fr.keyconsulting.formation.view.util.JfxUtils;
+import fr.keyconsulting.formation.view.util.JFXUtils;
 
 public class ApplicationView implements IPresentation  {
 	
@@ -41,8 +50,13 @@ public class ApplicationView implements IPresentation  {
 		return this.scene;
 	}
 	
+	public void displayError(String errHeader, String errDesc, Exception ex) {
+		Alert alertBox = JFXUtils.getErrorDialog(errHeader, errDesc, ex);
+		alertBox.showAndWait();		
+	}
+	
 	private Scene buildScene() {
-        Scene scene = new Scene((Parent) JfxUtils.loadFxml("/fr/keyconsulting/formation/fxml/vue.fxml", ctrl), 1024, 968);
+        Scene scene = new Scene((Parent) JFXUtils.loadFxml("/fr/keyconsulting/formation/fxml/vue.fxml", ctrl), 1024, 968);
         scene.getStylesheets().add("/fr/keyconsulting/formation/css/style.css");
         return scene;
 	}

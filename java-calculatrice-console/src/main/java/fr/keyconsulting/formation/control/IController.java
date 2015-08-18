@@ -1,4 +1,4 @@
-package fr.keyconsulting.formation.controller;
+package fr.keyconsulting.formation.control;
 
 import fr.keyconsulting.formation.presentation.IPresentation;
 

@@ -1,6 +1,6 @@
 package fr.keyconsulting.formation.view;
 
-import fr.keyconsulting.formation.controller.IController;
+import fr.keyconsulting.formation.control.IController;
 
 public class AFxController<C extends IController> {
 	

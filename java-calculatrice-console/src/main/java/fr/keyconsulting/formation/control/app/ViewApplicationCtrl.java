@@ -1,4 +1,4 @@
-package fr.keyconsulting.formation.controller.app;
+package fr.keyconsulting.formation.control.app;
 
 import fr.keyconsulting.formation.model.Calcul;
 import fr.keyconsulting.formation.model.Operand;
@@ -29,13 +29,19 @@ public class ViewApplicationCtrl implements IApplicationCtrl {
 	
 	@Override
 	public Calcul createNewCalcul(String operandA, String operatorSymbol, String operandB) {
-		Calcul calc = new Calcul(new Operand(operandA), Operators.of(operatorSymbol),	new Operand(operandB));
+		Calcul calc = new Calcul(new Operand(operandA), Operators.of(operatorSymbol), new Operand(operandB));
 		return calc;		
 	}
 	
 	@Override
 	public Result compute(Calcul operation) {
 		return operation.execute();
+	}
+
+	@Override
+	public void handleException(Exception err) {
+		err.printStackTrace();
+		appView.displayError("Une erreur est survenue", "Impossible de réaliser l'opération.", err);		
 	}
 
 }

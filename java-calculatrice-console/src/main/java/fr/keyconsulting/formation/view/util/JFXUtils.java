@@ -1,33 +1,35 @@
 package fr.keyconsulting.formation.view.util;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import fr.keyconsulting.formation.Main;
-import fr.keyconsulting.formation.control.app.IApplicationCtrl;
-import fr.keyconsulting.formation.view.app.FxController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import fr.keyconsulting.formation.Main;
+import fr.keyconsulting.formation.control.IController;
+import fr.keyconsulting.formation.view.AFxController;
 
 public class JFXUtils {
 	 
-    public static Node loadFxml(String fxml, IApplicationCtrl ctrl) {
+    public static <C extends IController, N extends Node> N loadFxml(String fxml, C standardCtrl) {
         FXMLLoader loader = new FXMLLoader();
         try {
             loader.setLocation(JFXUtils.class.getResource(fxml));
-            Node root = (Node) loader.load(Main.class.getResource(fxml).openStream());
-            FxController fxCtrl = loader.getController();
-            fxCtrl.setController(ctrl);
+            N root = loader.load(Main.class.getResource(fxml).openStream());
+            
+            //Init the standard app controller here
+            AFxController<C> fxCtrl = loader.getController();
+            fxCtrl.setController(standardCtrl);
+            
             return root;
-        } catch (IOException e) {
-            throw new IllegalStateException("cannot load FXML screen", e);
+        } catch (Exception e) {
+            throw new IllegalStateException("Cannot load FXML screen from: " + fxml, e);
         }
     }
     
@@ -38,11 +40,7 @@ public class JFXUtils {
 		alert.setContentText(errDesc);
 
 		// Create expandable Exception.
-		StringWriter sw = new StringWriter();
-		PrintWriter pw = new PrintWriter(sw);
-		ex.printStackTrace(pw);
-		String exceptionText = sw.toString();
-
+		String exceptionText = stackTraceToString(ex);
 		Label label = new Label("Détails de l'erreur :");
 
 		TextArea textArea = new TextArea(exceptionText);
@@ -63,6 +61,14 @@ public class JFXUtils {
 		alert.getDialogPane().setExpandableContent(expContent);
 
 		return alert;				
+	}
+
+	public static String stackTraceToString(Exception ex) {
+		StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
+		ex.printStackTrace(pw);
+		String exceptionText = sw.toString();
+		return exceptionText;
 	}
     
 }

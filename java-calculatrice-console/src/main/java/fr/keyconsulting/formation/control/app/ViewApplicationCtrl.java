@@ -1,6 +1,8 @@
 package fr.keyconsulting.formation.control.app;
 
-import fr.keyconsulting.formation.model.Calcul;
+import fr.keyconsulting.formation.control.calc.ICalculCtrl;
+import fr.keyconsulting.formation.control.calc.ViewCalculCtrl;
+import fr.keyconsulting.formation.model.ICalcul;
 import fr.keyconsulting.formation.model.Operand;
 import fr.keyconsulting.formation.model.Operators;
 import fr.keyconsulting.formation.model.Result;
@@ -28,13 +30,13 @@ public class ViewApplicationCtrl implements IApplicationCtrl {
 	}
 	
 	@Override
-	public Calcul createNewCalcul(String operandA, String operatorSymbol, String operandB) {
-		Calcul calc = new Calcul(new Operand(operandA), Operators.of(operatorSymbol), new Operand(operandB));
+	public ICalculCtrl createNewCalcul(String operandA, String operatorSymbol, String operandB) {
+		ICalculCtrl calc = new ViewCalculCtrl(new Operand(operandA), Operators.of(operatorSymbol), new Operand(operandB));
 		return calc;		
 	}
 	
 	@Override
-	public Result compute(Calcul operation) {
+	public Result compute(ICalcul operation) {
 		return operation.execute();
 	}
 

@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @Entity
-public class Calcul implements Serializable {
+public class Calcul implements Serializable, ICalcul {
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,6 +33,7 @@ public class Calcul implements Serializable {
 	LocalDateTime time;
 
 	public Calcul() {
+		this(null, null, null);
 	}
 
 	public Calcul(Operand leftOperand, Operator operator, Operand rightOperand) {
@@ -40,6 +41,7 @@ public class Calcul implements Serializable {
 	}
 
 	public Calcul(Operand leftOperand, Operator operator, Operand rightOperand, LocalDateTime time) {
+		super();
 		this.leftOperand = leftOperand;
 		this.rightOperand = rightOperand;
 		this.operator = operator;
@@ -47,6 +49,7 @@ public class Calcul implements Serializable {
 	}
 
 	public Result execute() {
+		time = LocalDateTime.now();
 		return new Result(operator.operate(leftOperand, rightOperand));
 	}
 
@@ -65,7 +68,6 @@ public class Calcul implements Serializable {
 		sj.add(operator.getCode());
 		sj.add(rightOperand.getValue().toString());
 		return sj.toString();
-
 	}
 
 	public Operand getLeftOperand() {

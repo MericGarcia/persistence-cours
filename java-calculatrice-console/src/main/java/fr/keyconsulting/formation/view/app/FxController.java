@@ -14,7 +14,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import fr.keyconsulting.formation.control.app.IApplicationCtrl;
+import fr.keyconsulting.formation.control.calc.ICalculCtrl;
 import fr.keyconsulting.formation.model.Calcul;
+import fr.keyconsulting.formation.model.ICalcul;
 import fr.keyconsulting.formation.model.Operators;
 import fr.keyconsulting.formation.model.Result;
 import fr.keyconsulting.formation.view.AFxController;
@@ -35,7 +37,7 @@ public class FxController extends AFxController<IApplicationCtrl>implements Init
 	private TextArea result;
 
 	@FXML
-	private TableView<Calcul> tableView;
+	private TableView<ICalcul> tableView;
 
 	@FXML
 	private TableColumn<Calcul, LocalDateTime> time;
@@ -48,7 +50,7 @@ public class FxController extends AFxController<IApplicationCtrl>implements Init
 
 	public void run(ActionEvent event) {
 		try {
-			Calcul calcul = getController().createNewCalcul(leftOperand.getText(), operator.getValue(), rightOperand.getText());
+			ICalculCtrl calcul = getController().createNewCalcul(leftOperand.getText(), operator.getValue(), rightOperand.getText());
 			tableView.getItems().add(calcul);
 			Result resultValue = getController().compute(calcul);
 			result.setText(resultValue.getValue().toPlainString());

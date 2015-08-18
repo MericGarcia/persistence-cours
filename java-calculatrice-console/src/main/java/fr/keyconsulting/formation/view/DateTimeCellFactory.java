@@ -3,7 +3,6 @@ package fr.keyconsulting.formation.view;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import fr.keyconsulting.formation.model.Calcul;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;

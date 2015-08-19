@@ -14,18 +14,20 @@ import javafx.scene.layout.Priority;
 import fr.keyconsulting.formation.Main;
 import fr.keyconsulting.formation.control.IController;
 import fr.keyconsulting.formation.view.AFxController;
+import fr.keyconsulting.formation.view.AView;
 
 public class JFXUtils {
 	 
-    public static <C extends IController, N extends Node> N loadFxml(String fxml, C standardCtrl) {
+    public static <C extends IController, F extends AFxController<C>, V extends AView<C, F>, N extends Node> N loadFxml(String fxml, V view) {
         FXMLLoader loader = new FXMLLoader();
         try {
             loader.setLocation(JFXUtils.class.getResource(fxml));
             N root = loader.load(Main.class.getResource(fxml).openStream());
             
             //Init the standard app controller here
-            AFxController<C> fxCtrl = loader.getController();
-            fxCtrl.setController(standardCtrl);
+            F fxCtrl = loader.getController();
+            fxCtrl.setController(view.getController());
+            view.setFxController(fxCtrl);
             
             return root;
         } catch (Exception e) {

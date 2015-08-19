@@ -22,76 +22,7 @@
 				</padding>
 			</HBox>
 
-			<Pane prefWidth="400.0" fx:id="operation">
-				<children>
-					<VBox>
-						<children>
-							<HBox >
-								<children>
-									<Label prefHeight="16.0" prefWidth="50.0" text="Left">
-										<padding>
-											<Insets left="10.0" right="10.0" />
-										</padding>
-									</Label>
-									<TextField fx:id="leftOperand" prefHeight="25.0" prefWidth="50.0">
-										<HBox.margin>
-											<Insets left="10.0" right="10.0" />
-										</HBox.margin>
-									</TextField>
-									<Label prefHeight="16.0" prefWidth="80.0" text="Operator">
-										<padding>
-											<Insets left="10.0" />
-										</padding>
-									</Label>
-									<ChoiceBox fx:id="operator" prefWidth="50.0">
-										<HBox.margin>
-											<Insets left="10.0" right="10.0" />
-										</HBox.margin>
-									</ChoiceBox>
-									<Label prefHeight="16.0" prefWidth="50.0" text="Right">
-										<padding>
-											<Insets left="10.0" />
-										</padding>
-									</Label>
-									<TextField fx:id="rightOperand" prefWidth="50.0">
-										<HBox.margin>
-											<Insets left="10.0" right="10.0" />
-										</HBox.margin>
-									</TextField>
-								</children>
-								<padding>
-									<Insets left="10.0" top="10.0" />
-								</padding>
-							</HBox>
-
-							<HBox>
-								<children>
-									<Button mnemonicParsing="false" onAction="#run" text="Calculer" />
-								</children>
-								<padding>
-									<Insets left="10.0" top="10.0" />
-								</padding>
-							</HBox>
-
-							<Pane prefHeight="60.0" prefWidth="200.0">
-								<children>
-									<TextArea editable="false" fx:id="result" prefHeight="50.0" prefWidth="430.0">
-										<padding>
-											<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-										</padding>
-									</TextArea>
-								</children>
-								<padding>
-									<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-								</padding>
-								<VBox.margin>
-									<Insets bottom="10.0" left="10.0" right="10.0" top="30.0" />
-								</VBox.margin>
-							</Pane>
-
-						</children>
-					</VBox>
-				</children>
+			<Pane fx:id="operation">
 			</Pane>
 
 			<Pane fx:id="results">

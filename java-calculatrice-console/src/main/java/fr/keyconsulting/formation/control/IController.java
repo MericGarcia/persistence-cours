@@ -5,5 +5,7 @@ import fr.keyconsulting.formation.presentation.IPresentation;
 public interface IController {
 	
 	public IPresentation getPresentation();
+	
+	public void handleException(Exception err);
 
 }

@@ -8,58 +8,39 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import fr.keyconsulting.formation.control.app.IApplicationCtrl;
 import fr.keyconsulting.formation.control.calc.ICalculCtrl;
-import fr.keyconsulting.formation.model.Calcul;
 import fr.keyconsulting.formation.model.ICalcul;
-import fr.keyconsulting.formation.model.Operators;
-import fr.keyconsulting.formation.model.Result;
 import fr.keyconsulting.formation.view.AFxController;
 import fr.keyconsulting.formation.view.DateTimeCellFactory;
 
-public class FxController extends AFxController<IApplicationCtrl>implements Initializable {
+public class FxController extends AFxController<IApplicationCtrl> implements Initializable {
 	
-	@FXML
-	private TextField leftOperand;
-
-	@FXML
-	private ChoiceBox<String> operator;
-
-	@FXML
-	private TextField rightOperand;
-
-	@FXML
-	private TextArea result;
-
 	@FXML
 	private TableView<ICalcul> tableView;
 
 	@FXML
-	private TableColumn<Calcul, LocalDateTime> time;
+	private TableColumn<ICalcul, LocalDateTime> time;
+	
+	@FXML
+	private Pane operation;
 
 	public void initialize(URL location, ResourceBundle resources) {
-		operator.setItems(FXCollections.observableArrayList(Operators.all()));
 		tableView.setItems(FXCollections.observableArrayList());
-		time.setCellFactory(new DateTimeCellFactory<Calcul>());
+		time.setCellFactory(new DateTimeCellFactory<ICalcul>());
 	}
 
-	public void run(ActionEvent event) {
-		try {
-			ICalculCtrl calcul = getController().createNewCalcul(leftOperand.getText(), operator.getValue(), rightOperand.getText());
-			tableView.getItems().add(calcul);
-			Result resultValue = getController().compute(calcul);
-			result.setText(resultValue.getValue().toPlainString());
-		} catch (Exception e) {
-			getController().handleException(e);
-		}
+	public void newOperation(ActionEvent event) {
+		ICalculCtrl opeartionCtrl = getController().createNewCalcul();
+		Pane newOperationPane = (Pane) opeartionCtrl.getPresentation().asGUICompoment();
+		this.operation.getChildren().clear();
+		this.operation.getChildren().addAll(newOperationPane.getChildren());
 	}
 	
-	public void newOperation(ActionEvent event) {
-	
+	public void addCalcul(ICalcul calc) {
+		tableView.getItems().add(calc);		
 	}
 }

@@ -9,7 +9,7 @@
 
 <Pane prefWidth="400.0"
 	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
-	fx:controller="fr.keyconsulting.formation.view.app.FxController"
+	fx:controller="fr.keyconsulting.formation.view.calc.FxController"
 >
 				<children>
 					<VBox>
@@ -54,7 +54,7 @@
 
 							<HBox>
 								<children>
-									<Button mnemonicParsing="false" onAction="#run" text="Calculer" />
+									<Button mnemonicParsing="false" onAction="#compute" text="Calculer" />
 								</children>
 								<padding>
 									<Insets left="10.0" top="10.0" />

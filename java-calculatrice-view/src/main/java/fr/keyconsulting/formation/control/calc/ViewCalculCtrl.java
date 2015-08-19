@@ -12,6 +12,7 @@ public class ViewCalculCtrl extends ACalculCtrl {
 
 	public ViewCalculCtrl(IApplicationCtrl parent) {		
 		super(parent);
+		this.calcView = new CalculView(this);
 	}
 
 	@Override

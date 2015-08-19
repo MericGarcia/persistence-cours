@@ -6,10 +6,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import fr.keyconsulting.formation.control.app.IApplicationCtrl;
 import fr.keyconsulting.formation.model.ICalcul;
-import fr.keyconsulting.formation.view.AView;
+import fr.keyconsulting.formation.view.AFxView;
 import fr.keyconsulting.formation.view.util.JFXUtils;
 
-public class ApplicationView extends AView<IApplicationCtrl, FxController>  {
+public class ApplicationView extends AFxView<IApplicationCtrl, FxController>  {
 	
 	private Scene scene;
 	

@@ -14,7 +14,7 @@ import javafx.scene.layout.Priority;
 import fr.keyconsulting.formation.Main;
 import fr.keyconsulting.formation.control.IController;
 import fr.keyconsulting.formation.view.AFxController;
-import fr.keyconsulting.formation.view.AView;
+import fr.keyconsulting.formation.view.AFxView;
 
 public class JFXUtils {
 	
@@ -36,7 +36,7 @@ public class JFXUtils {
 	 * @return
 	 * 		the loaded FX root Node
 	 */
-	public static <C extends IController, F extends AFxController<C>, V extends AView<C, F>, N extends Node> N loadFxml(String fxml, V view) {
+	public static <C extends IController, F extends AFxController<C>, V extends AFxView<C, F>, N extends Node> N loadFxml(String fxml, V view) {
 		FXMLLoader loader = new FXMLLoader();
 		try {
 			loader.setLocation(JFXUtils.class.getResource(fxml));

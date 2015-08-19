@@ -3,10 +3,10 @@ package fr.keyconsulting.formation.view.calc;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import fr.keyconsulting.formation.control.calc.ICalculCtrl;
-import fr.keyconsulting.formation.view.AView;
+import fr.keyconsulting.formation.view.AFxView;
 import fr.keyconsulting.formation.view.util.JFXUtils;
 
-public class CalculView extends AView<ICalculCtrl, FxController>  {
+public class CalculView extends AFxView<ICalculCtrl, FxController>  {
 	
 	private Pane pane;
 	

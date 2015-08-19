@@ -35,8 +35,8 @@ public class FxController extends AFxController<IApplicationCtrl> implements Ini
 	}
 
 	public void newOperation(ActionEvent event) {
-		ICalculCtrl opeartionCtrl = getController().createNewCalcul();
-		Pane newOperationPane = (Pane) opeartionCtrl.getPresentation().asGUICompoment();
+		ICalculCtrl operationCtrl = getController().createNewCalcul();
+		Pane newOperationPane = (Pane) operationCtrl.getPresentation().asGUICompoment();
 		this.operation.getChildren().clear();
 		this.operation.getChildren().addAll(newOperationPane);
 	}

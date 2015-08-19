@@ -41,6 +41,6 @@ public class FxController extends AFxController<IApplicationCtrl> implements Ini
 	}
 	
 	public void addCalcul(ICalcul calc) {
-		tableView.getItems().add(calc);		
+		tableView.getItems().add(calc);
 	}
 }

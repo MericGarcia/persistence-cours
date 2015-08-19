@@ -22,8 +22,8 @@
 				</padding>
 			</HBox>
 
-			<Pane fx:id="operation">
-			</Pane>
+			<StackPane fx:id="operation">
+			</StackPane>
 
 			<Pane fx:id="results">
 				<children>

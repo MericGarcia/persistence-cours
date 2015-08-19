@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import fr.keyconsulting.formation.control.app.IApplicationCtrl;
 import fr.keyconsulting.formation.control.calc.ICalculCtrl;
 import fr.keyconsulting.formation.model.ICalcul;
@@ -26,7 +27,7 @@ public class FxController extends AFxController<IApplicationCtrl> implements Ini
 	private TableColumn<ICalcul, LocalDateTime> time;
 	
 	@FXML
-	private Pane operation;
+	private StackPane operation;
 
 	public void initialize(URL location, ResourceBundle resources) {
 		tableView.setItems(FXCollections.observableArrayList());
@@ -37,7 +38,7 @@ public class FxController extends AFxController<IApplicationCtrl> implements Ini
 		ICalculCtrl opeartionCtrl = getController().createNewCalcul();
 		Pane newOperationPane = (Pane) opeartionCtrl.getPresentation().asGUICompoment();
 		this.operation.getChildren().clear();
-		this.operation.getChildren().addAll(newOperationPane.getChildren());
+		this.operation.getChildren().addAll(newOperationPane);
 	}
 	
 	public void addCalcul(ICalcul calc) {

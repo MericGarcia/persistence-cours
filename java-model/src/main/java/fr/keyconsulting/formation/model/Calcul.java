@@ -48,9 +48,13 @@ public class Calcul implements Serializable, ICalcul {
 		this.time = time;
 	}
 
-	public Result execute() {
+	public Result execute() {		
+		if(operator == null) {
+			throw new IllegalStateException("No operator specified");
+		}
+		Result result = new Result(operator.operate(leftOperand, rightOperand));
 		time = LocalDateTime.now();
-		return new Result(operator.operate(leftOperand, rightOperand));
+		return result;
 	}
 
     public long getId() {

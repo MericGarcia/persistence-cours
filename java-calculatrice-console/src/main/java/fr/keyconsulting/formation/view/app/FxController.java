@@ -58,4 +58,8 @@ public class FxController extends AFxController<IApplicationCtrl>implements Init
 			getController().handleException(e);
 		}
 	}
+	
+	public void newOperation(ActionEvent event) {
+	
+	}
 }

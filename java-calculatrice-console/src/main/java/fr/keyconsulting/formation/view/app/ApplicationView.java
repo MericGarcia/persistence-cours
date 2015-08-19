@@ -48,7 +48,7 @@ public class ApplicationView implements IPresentation  {
 	}
 	
 	private Scene buildScene() {
-		Parent rootNode = JFXUtils.loadFxml("/fr/keyconsulting/formation/fxml/vue.fxml", ctrl);
+		Parent rootNode = JFXUtils.loadFxml("/fr/keyconsulting/formation/fxml/appView.fxml", ctrl);
         Scene scene = new Scene(rootNode, 1024, 968);
         scene.getStylesheets().add("/fr/keyconsulting/formation/css/style.css");
         return scene;

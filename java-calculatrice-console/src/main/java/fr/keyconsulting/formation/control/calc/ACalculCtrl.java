@@ -21,7 +21,7 @@ public abstract class ACalculCtrl extends Calcul implements ICalculCtrl {
 	@Override
 	public Result execute() {
 		Result result = super.execute();
-		parent.addCalcul(this);
+		parent.addCalcul(this); //notify parent ctrl
 		return result;
 	}
 

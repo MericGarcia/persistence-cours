@@ -13,7 +13,7 @@ public class ConsoleCalculCtrl extends ACalculCtrl {
 
 	@Override
 	public IPresentation getPresentation() {
-		return null;
+		return null; // No presentation object, this is a console app.
 	}
 
 }

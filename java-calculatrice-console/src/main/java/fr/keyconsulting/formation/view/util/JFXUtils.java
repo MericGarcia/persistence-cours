@@ -17,23 +17,41 @@ import fr.keyconsulting.formation.view.AFxController;
 import fr.keyconsulting.formation.view.AView;
 
 public class JFXUtils {
-	 
-    public static <C extends IController, F extends AFxController<C>, V extends AView<C, F>, N extends Node> N loadFxml(String fxml, V view) {
-        FXMLLoader loader = new FXMLLoader();
-        try {
-            loader.setLocation(JFXUtils.class.getResource(fxml));
-            N root = loader.load(Main.class.getResource(fxml).openStream());
-            
-            //Init the standard app controller here
-            F fxCtrl = loader.getController();
-            fxCtrl.setController(view.getController());
-            view.setFxController(fxCtrl);
-            
-            return root;
-        } catch (Exception e) {
-            throw new IllegalStateException("Cannot load FXML screen from: " + fxml, e);
-        }
-    }
+	
+	/**
+	 * This loads some Java FX nodes from file and links all the controllers and view to themselves.
+	 * Generic types used are these ones :
+	 * - C the applicative controller
+	 * - F the JavaFX controller
+	 * - V the abstract View (who call this loading). 
+	 * This View got a pointer to C which has to be to be set to the, just loaded, F.
+	 * The F has to be set on V.
+	 * 
+	 * In brief, after the loading :  View { C ctrl, F fxCtrl }, FxCtrl { C ctrl, N[] nodes... }
+	 * 
+	 * @param fxml
+	 * 		path to FXML file
+	 * @param view
+	 * 		the View which call this loading
+	 * @return
+	 * 		the loaded FX root Node
+	 */
+	public static <C extends IController, F extends AFxController<C>, V extends AView<C, F>, N extends Node> N loadFxml(String fxml, V view) {
+		FXMLLoader loader = new FXMLLoader();
+		try {
+			loader.setLocation(JFXUtils.class.getResource(fxml));
+			N root = loader.load(Main.class.getResource(fxml).openStream());
+
+			// Init the FX controller here
+			F fxCtrl = loader.getController();
+			fxCtrl.setController(view.getController()); // link FX ctrl to applicative one
+			view.setFxController(fxCtrl);	// link abstract view with the, new loaded, FX ctrl
+
+			return root;
+		} catch (Exception e) {
+			throw new IllegalStateException("Cannot load FXML screen from: " + fxml, e);
+		}
+	}
     
 	public static Alert getErrorDialog(String errHeader, String errDesc, Exception ex) {
 		Alert alert = new Alert(AlertType.ERROR);

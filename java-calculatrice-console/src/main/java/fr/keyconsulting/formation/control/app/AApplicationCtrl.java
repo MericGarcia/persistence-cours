@@ -19,7 +19,7 @@ public abstract class AApplicationCtrl implements IApplicationCtrl {
 
 	@Override
 	public ICalculCtrl createNewCalcul() {
-		return AFactory.getInstance().createCalcul(this);
+		return AFactory.getInstance().createCalcul(this); //call the factory to create a new partner
 	}
 
 	public abstract void addCalcul(ICalcul operation);

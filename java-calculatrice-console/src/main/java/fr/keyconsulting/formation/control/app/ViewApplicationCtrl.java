@@ -1,15 +1,11 @@
 package fr.keyconsulting.formation.control.app;
 
-import fr.keyconsulting.formation.control.calc.ICalculCtrl;
-import fr.keyconsulting.formation.control.calc.ViewCalculCtrl;
 import fr.keyconsulting.formation.model.ICalcul;
-import fr.keyconsulting.formation.model.Operand;
-import fr.keyconsulting.formation.model.Operators;
 import fr.keyconsulting.formation.presentation.IPresentation;
 import fr.keyconsulting.formation.view.app.ApplicationView;
 import fr.keyconsulting.formation.view.app.FxApplication;
 
-public class ViewApplicationCtrl implements IApplicationCtrl {
+public class ViewApplicationCtrl extends AApplicationCtrl {
 	
 	private ApplicationView appView;
 	
@@ -29,25 +25,13 @@ public class ViewApplicationCtrl implements IApplicationCtrl {
 	}
 	
 	@Override
-	public ICalculCtrl createNewCalcul(String operandA, String operatorSymbol, String operandB) {
-		ICalculCtrl calc = new ViewCalculCtrl(this, new Operand(operandA), Operators.of(operatorSymbol), new Operand(operandB));
-		return calc;		
-	}
-	
-	@Override
-	public ICalculCtrl createNewCalcul() {
-		ICalculCtrl calc = new ViewCalculCtrl(this);
-		return calc;		
-	}	
-	
-	@Override
 	public void addCalcul(ICalcul operation) {
 		appView.addNewCalcul(operation);
 	}
 
 	@Override
 	public void handleException(Exception err) {
-		err.printStackTrace();
+		super.handleException(err);
 		appView.displayError("Une erreur est survenue", "Impossible de créer une nouvelle opération.", err);		
 	}
 

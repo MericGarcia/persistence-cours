@@ -8,8 +8,6 @@ public interface IApplicationCtrl extends IController {
 	
 	public void start(String[] progArgs);
 	
-	public ICalculCtrl createNewCalcul(String operandA, String operatorSymbol, String operandB);
-	
 	public ICalculCtrl createNewCalcul();
 	
 	public void addCalcul(ICalcul operation);

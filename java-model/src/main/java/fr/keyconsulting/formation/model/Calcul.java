@@ -100,6 +100,6 @@ public class Calcul implements Serializable, ICalcul {
 
 	public void setTime(LocalDateTime time) {
 		this.time = time;
-	}
+	}	
 
 }

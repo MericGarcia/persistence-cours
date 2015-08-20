@@ -1,5 +1,7 @@
 package fr.keyconsulting.formation.control.calc;
 
+import java.util.Set;
+
 import fr.keyconsulting.formation.control.app.IApplicationCtrl;
 import fr.keyconsulting.formation.model.Calcul;
 import fr.keyconsulting.formation.model.Operand;
@@ -45,6 +47,11 @@ public abstract class ACalculCtrl extends Calcul implements ICalculCtrl {
 	@Override
 	public void setRightOperand(String operandAsText) {
 		super.setRightOperand(new Operand(operandAsText));		
+	}
+	
+	@Override
+	public Set<String> getAllOperators() {
+		return Operators.all();
 	}
 
 }

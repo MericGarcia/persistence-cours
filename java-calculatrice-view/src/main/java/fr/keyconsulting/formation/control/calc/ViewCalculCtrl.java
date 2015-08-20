@@ -1,6 +1,7 @@
 package fr.keyconsulting.formation.control.calc;
 
 import fr.keyconsulting.formation.control.app.IApplicationCtrl;
+import fr.keyconsulting.formation.factory.AViewsFactory;
 import fr.keyconsulting.formation.presentation.IPresentation;
 import fr.keyconsulting.formation.view.calc.CalculView;
 
@@ -12,7 +13,7 @@ public class ViewCalculCtrl extends ACalculCtrl {
 
 	public ViewCalculCtrl(IApplicationCtrl parent) {		
 		super(parent);
-		this.calcView = new CalculView(this);
+		this.calcView = AViewsFactory.getInstance().createCalculView(this);
 	}
 
 	@Override

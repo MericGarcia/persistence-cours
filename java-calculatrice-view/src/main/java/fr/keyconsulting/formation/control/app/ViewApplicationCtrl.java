@@ -1,5 +1,6 @@
 package fr.keyconsulting.formation.control.app;
 
+import fr.keyconsulting.formation.factory.AViewsFactory;
 import fr.keyconsulting.formation.model.ICalcul;
 import fr.keyconsulting.formation.presentation.IPresentation;
 import fr.keyconsulting.formation.view.app.ApplicationView;
@@ -11,7 +12,7 @@ public class ViewApplicationCtrl extends AApplicationCtrl {
 	
 	public ViewApplicationCtrl() {
 		super();
-		appView = new ApplicationView(this);
+		appView = AViewsFactory.getInstance().createApplicationView(this);
 	}
 
 	@Override

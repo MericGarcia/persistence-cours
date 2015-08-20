@@ -5,7 +5,7 @@ import fr.keyconsulting.formation.control.calc.ICalculCtrl;
 import fr.keyconsulting.formation.view.app.ApplicationView;
 import fr.keyconsulting.formation.view.calc.CalculView;
 
-public class FxViewFactory extends AViewsFactory {
+public class FxViewsFactory extends AViewsFactory {
 
 	@Override
 	public ApplicationView createApplicationView(IApplicationCtrl ctrl) {

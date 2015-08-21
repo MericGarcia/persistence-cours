@@ -36,9 +36,12 @@ public class FxController extends AFxController<IApplicationCtrl> implements Ini
 
 	public void newOperation(ActionEvent event) {
 		ICalculCtrl operationCtrl = getController().createNewCalcul();
+		//TODO : add Calcul FX Pane into the operation StackPane 
+		/**
 		Pane newOperationPane = (Pane) operationCtrl.getPresentation().asGUICompoment();
 		this.operation.getChildren().clear();
 		this.operation.getChildren().addAll(newOperationPane);
+		*/
 	}
 	
 	public void addCalcul(ICalcul calc) {

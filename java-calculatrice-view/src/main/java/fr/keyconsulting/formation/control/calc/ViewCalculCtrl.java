@@ -13,7 +13,8 @@ public class ViewCalculCtrl extends ACalculCtrl {
 
 	public ViewCalculCtrl(IApplicationCtrl parent) {		
 		super(parent);
-		this.calcView = AViewsFactory.getInstance().createCalculView(this);
+		//TODO init the calcView here
+		//this.calcView = AViewsFactory.getInstance().createCalculView(this);
 	}
 
 	@Override

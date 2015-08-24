@@ -10,8 +10,7 @@ public class MainCglib {
 
 	public static void main(String... args) throws Exception {
 		Properties appProps = new Properties();
-		try (InputStream is = Main.class
-				.getResourceAsStream("/application.properties")) {
+		try (InputStream is = Main.class.getResourceAsStream("/application.properties")) {
 			appProps.load(is);
 		}
 

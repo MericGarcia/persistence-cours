@@ -23,6 +23,7 @@ public class MainDynamic {
 		IPlugin plugin = (IPlugin) clazz.newInstance();			
 		executePlugin(plugin);
 		
+		/*
 		File binFolder = new File(Main.class.getResource("/").getFile());
 		
 		System.out.println("Entrer 'yes' when ready");
@@ -40,6 +41,7 @@ public class MainDynamic {
 		System.out.println("reloaded instance of himself: " + plugin.getClass().isInstance(reloadedPlugin));
 		System.out.println("plugin instance of IPlugin: " + IPlugin.class.isInstance(plugin));
 		System.out.println("reloadedPlugin instance of IPlugin: " + IPlugin.class.isInstance(reloadedPlugin));
+		*/
 		
 		System.out.println("Ok.");
 	}

@@ -22,16 +22,12 @@ public class PluginClassLoader extends ClassLoader {
 
 		Class<?> clazz;
 		
-		if (!fullClassName.startsWith("fr.keyconsulting.formation.plugins.impl")) {
+		if (!fullClassName.startsWith("fr.keyconsulting.formation.plugins")) {
 			clazz = super.loadClass(fullClassName);
 		} 
 		else {
-			try {
-				File binFile = new File(binFolder, fullClassName.replace('.', '/') + ".class");	
-				clazz = loadClassFromFile(fullClassName, binFile);
-			} catch (IOException e) {
-				throw new RuntimeException("cannot load class: " + fullClassName, e);
-			}
+			// TODO : complete implementation load Java class from its binary file
+			clazz = null;
 		}
 		return clazz;
 	}

@@ -48,11 +48,11 @@ public class DataBaseHandler {
 		if (connection == null) {
 			throw new SQLException("Impossible d'obtenir une connexion");
 		}
+		connection.setAutoCommit(false);
 	}
 
 	public void commit() throws SQLException {
 		connection.commit();
-		connection.setAutoCommit(true);
 	}
 
 	public void rollback() throws SQLException {
@@ -62,9 +62,11 @@ public class DataBaseHandler {
 	public void disconnect() throws SQLException {
 		if (this.connection != null) {
 			commit();
+			connection.setAutoCommit(true);
 			this.connection.close();
 			this.connection = null;
 		} 
+
 	}
 	
     public Connection getConnection() {

@@ -11,14 +11,14 @@
 		<class>fr.keyconsulting.formation.model.MultiplyOperator</class>
 		<class>fr.keyconsulting.formation.model.DivideOperator</class>
 		<properties>
-			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
+        <property name="connection.driver_class" value="org.postgresql.Driver" />
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:derby:/Users/mericgarcia/Workspace/Repositories/workspace-archi/simpleDb;create=true" />
-			<!-- <property name="javax.persistence.jdbc.user" value="admin" /> -->
-			<!-- <property name="javax.persistence.jdbc.password" value="admin" /> -->
-			<property name="hibernate.default_schema" value="APP" />
-			<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+				value="jdbc:postgresql://localhost:5432/test" />
+			<property name="javax.persistence.jdbc.user" value="test" />
+			<property name="javax.persistence.jdbc.password" value="test" />
+			<property name="hibernate.default_schema" value="public" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 			<property name="hibernate.generateDdl" value="true" />
 		</properties>
 

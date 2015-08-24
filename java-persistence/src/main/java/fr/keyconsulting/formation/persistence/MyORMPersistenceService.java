@@ -1,31 +1,33 @@
 package fr.keyconsulting.formation.persistence;
 
+import java.lang.reflect.Field;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.StringJoiner;
 
 import fr.keyconsulting.formation.model.Calcul;
-import fr.keyconsulting.formation.model.Operand;
-import fr.keyconsulting.formation.model.Operator;
-import fr.keyconsulting.formation.model.Operators;
 import fr.keyconsulting.formation.persistence.database.DataBaseHandler;
 import fr.keyconsulting.formation.service.PersistenceService;
 
-public class JDBCPersistenceService implements PersistenceService {
+public class MyORMPersistenceService implements PersistenceService {
 
 	private static final String PASSWORD = "test";
 	private static final String USER = "test";
 	private static final String DRIVER = "org.postgresql.Driver";
 	private static final String URL = "jdbc:postgresql://localhost:5432/testJDBC";
 
+	private static final String INSERT = "insert into :table (:columns) VALUES (:values)";
+	private static final String SELECT = "select * from :table";
+
+	
 	private DataBaseHandler dbHandler;
 
-	public JDBCPersistenceService() {
+	public MyORMPersistenceService() {
 		dbHandler = DataBaseHandler.getInstance();
 		try {
 			dbHandler.init(DRIVER, URL);
@@ -54,35 +56,43 @@ public class JDBCPersistenceService implements PersistenceService {
 	}
 
 	private void insertQuery(Calcul calcul) throws SQLException {
-		Statement stmt = null;
-		String lOp = calcul.getLeftOperand().getValue().toString();
-		String op = calcul.getOperator().getCode();
-		String rOp = calcul.getRightOperand().getValue().toString();
-		String time = calcul.getTime().format(DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss"));
+		PreparedStatement statement = null;
 
-		String query = "insert into CALCUL " + "(rightOperand,operator,leftOperand,time) " + "VALUES ('" + lOp + "','"
-				+ op + "','" + rOp + "'," + "to_date('" + time + "', 'yyyy-mm-dd hh24:mi:ss'))";
-
-		stmt = dbHandler.getConnection().createStatement();
+		StringJoiner columns = new StringJoiner(",");
+		StringJoiner values = new StringJoiner(",");
 		
-		stmt.executeUpdate(query);
+		for (Field column : DBUtils.getFields(calcul)) {
+			columns.add(column.getName());
+			values.add("?");
+		}
+
+		String sql = INSERT.replace(":table", calcul.getClass().getSimpleName()).replace(":columns", columns.toString())
+				.replace(":values", values.toString());
+
+		statement = dbHandler.getConnection().prepareStatement(sql);
+		int i = 1;
+		for (Field column : DBUtils.getFields(calcul)) {
+			DBUtils.setColunmValue(statement, calcul, column.getName(), i++);
+		}		
+
+		statement.executeUpdate();
 	}
 
-	private List<Calcul> selectAllQuery() throws SQLException {
+	private List<Calcul> selectAllQuery(String table) throws SQLException {
 		List<Calcul> calculs = new ArrayList<>();
 		Statement stmt = null;
 
-		String query = "select rightOperand,operator,leftOperand,time from CALCUL";
+		String query = SELECT.replace(":table", table);
 
 		stmt = dbHandler.getConnection().createStatement();
 		ResultSet rs = stmt.executeQuery(query);
+		
 		while (rs.next()) {
-			Operand leftOperand = new Operand(rs.getBigDecimal("leftOperand"));
-			Operator operator = Operators.of(rs.getString("operator"));
-			Operand rightOperand = new Operand(rs.getBigDecimal("rightOperand"));
-			LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
-			calculs.add(new Calcul(leftOperand, operator, rightOperand, time));
+			Calcul calcul = new Calcul();
+			DBUtils.populateObject(calcul, rs);
+			calculs.add(calcul);
 		}
+		
 		return calculs;
 	}
 
@@ -92,7 +102,7 @@ public class JDBCPersistenceService implements PersistenceService {
 		try {
 			dbHandler.connect(USER, PASSWORD);
 			dbHandler.getConnection().createStatement();
-			result = selectAllQuery();
+			result = selectAllQuery(Calcul.class.getSimpleName());
 			dbHandler.disconnect();
 		} catch (SQLException e) {
 			e.printStackTrace();

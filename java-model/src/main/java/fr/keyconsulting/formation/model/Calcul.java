@@ -22,14 +22,18 @@ public class Calcul implements Serializable, ICalcul {
 	private long id;
 
 	@OneToOne(cascade=CascadeType.ALL)
+	@Attribute
 	Operand leftOperand;
     
 	@OneToOne(cascade=CascadeType.ALL)
+	@Attribute
 	Operand rightOperand;
 
 	@OneToOne(cascade=CascadeType.ALL)
+	@Attribute
 	Operator operator;
 
+	@Attribute
 	LocalDateTime time;
 
 	public Calcul() {

@@ -17,7 +17,7 @@ public class Main {
     	*/
     	
     	ApplicationContext applicationContext = new ClassPathXmlApplicationContext("/spring/application-context.xml");
-    	IApplicationCtrl appCtrl = applicationContext.getBean(AFactory.class).createApplication();
+    	IApplicationCtrl appCtrl = applicationContext.getBean("ctrlFactory", AFactory.class).createApplication();
     	appCtrl.start(args);
     }
 

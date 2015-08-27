@@ -5,10 +5,17 @@
 	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-  <bean id="ctrlFactory" class="fr.keyconsulting.formation.factory.GUIControllersFactory" init-method="init">  
+  <bean scope="singleton" id="ctrlFactory" class="fr.keyconsulting.formation.factory.GUIControllersFactory" factory-method="initInstance">  
   </bean>
   
-  <bean id="viewsFactory" class="fr.keyconsulting.formation.factory.FxViewsFactory" init-method="init">  
+  <bean scope="singleton" id="viewsFactory" class="fr.keyconsulting.formation.factory.FxViewsFactory" factory-method="initInstance">  
   </bean>
+  
+  <bean id="appCtrl" scope="prototype" class="fr.keyconsulting.formation.control.app.ViewApplicationCtrl" >  
+  </bean>
+  
+ <bean name="calcul" scope="prototype" class="fr.keyconsulting.formation.control.calc.ViewCalculCtrl" >
+ 	<!-- <constructor-arg index="0" type="fr.keyconsulting.formation.control.app.IApplicationCtrl" ref="appCtrl"></constructor-arg> --> 	
+ </bean>
 
 </beans>

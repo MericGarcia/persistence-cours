@@ -7,8 +7,9 @@ import fr.keyconsulting.formation.view.calc.CalculView;
 
 public class FxViewsFactory extends AViewsFactory {
 	
-	public static void init() throws InstantiationException, IllegalAccessException {
+	public static AViewsFactory initInstance() throws InstantiationException, IllegalAccessException {
 		AViewsFactory.register(FxViewsFactory.class);
+		return AViewsFactory.getInstance();
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 import fr.keyconsulting.formation.model.Calcul;
+import fr.keyconsulting.formation.persistence.database.DBUtils;
 import fr.keyconsulting.formation.persistence.database.DataBaseHandler;
 import fr.keyconsulting.formation.service.PersistenceService;
 

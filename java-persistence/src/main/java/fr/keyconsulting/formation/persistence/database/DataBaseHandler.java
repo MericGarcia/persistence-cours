@@ -6,9 +6,6 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import fr.keyconsulting.formation.persistence.JDBCPersistenceService;
-import fr.keyconsulting.formation.service.PersistenceService;
-
 public class DataBaseHandler {
 	
 	private String driverClassName;

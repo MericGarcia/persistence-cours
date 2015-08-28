@@ -2,11 +2,18 @@ package fr.keyconsulting.formation.controller;
 
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import fr.keyconsulting.formation.model.Calcul;
 import fr.keyconsulting.formation.model.Operand;
 import fr.keyconsulting.formation.model.Operators;
+import fr.keyconsulting.formation.service.ICalculService;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +25,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class Controller implements Initializable {
+	
+	ApplicationContext context = new ClassPathXmlApplicationContext("/Spring-ws-client.xml");
 
 	@FXML
 	private TextField leftOperand;
@@ -36,10 +45,18 @@ public class Controller implements Initializable {
 
 	@FXML
 	private TableColumn<Calcul, LocalDateTime> time;
+	
+	ICalculService service;
 
 	public void initialize(URL location, ResourceBundle resources) {
+		service = (ICalculService) context.getBean("calculClient");
 		operator.setItems(FXCollections.observableArrayList(Operators.all()));
-		tableView.setItems(FXCollections.observableArrayList());
+		List<Calcul> list = service.getAll();
+		if (list != null) {
+			tableView.setItems(FXCollections.observableArrayList(list));
+		}else{
+			tableView.setItems(FXCollections.observableArrayList());
+		}
 		time.setCellFactory(new DateTimeCellFactory<Calcul>());
 	}
 
@@ -48,6 +65,7 @@ public class Controller implements Initializable {
 				new Operand(rightOperand.getText()));
 		tableView.getItems().add(calcul);
 		result.setText(calcul.execute().getValue().toPlainString());
+		service.addCalcul(calcul);
 	}
 
 }

@@ -36,7 +36,6 @@ public class FilePersistenceService implements PersistenceService {
 			try {
 				csv.createNewFile();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -44,7 +43,6 @@ public class FilePersistenceService implements PersistenceService {
 			is = new FileInputStream(csv);
 			os = new FileOutputStream(csv,true);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		br = new BufferedReader(new InputStreamReader(is));
@@ -62,7 +60,6 @@ public class FilePersistenceService implements PersistenceService {
 			bw.newLine();
 			bw.flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

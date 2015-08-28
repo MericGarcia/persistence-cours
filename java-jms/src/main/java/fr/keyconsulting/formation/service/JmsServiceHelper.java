@@ -13,9 +13,10 @@ public class JmsServiceHelper {
 	JmsMessageSender jmsMessageSender;
 	JmsMessageConsumer jmsMessageConsumer;
 	
+	ApplicationContext ctx = new ClassPathXmlApplicationContext("Spring-context-jms.xml");
+	
 	
 	public JmsServiceHelper(){
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("Spring-context-jms.xml");
 	    jmsMessageSender = (JmsMessageSender)ctx.getBean("jmsMessageSender");		
 	    jmsMessageConsumer = (JmsMessageConsumer)ctx.getBean("jmsMessageConsumer");				
 	}

@@ -30,7 +30,6 @@ public class JDBCPersistenceService implements PersistenceService {
 		try {
 			dbHandler.init(DRIVER, URL);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

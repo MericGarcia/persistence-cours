@@ -9,7 +9,7 @@ import javax.jws.WebService;
 import fr.keyconsulting.formation.model.Calcul;
 
 @WebService
-public class CalculService {
+public class CalculService implements ICalculService {
 
 	public List<Calcul> calculs = new ArrayList<>();
 

@@ -2,11 +2,14 @@ package fr.keyconsulting.formation.controller;
 
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import fr.keyconsulting.formation.model.Calcul;
 import fr.keyconsulting.formation.model.Operand;
 import fr.keyconsulting.formation.model.Operators;
+import fr.keyconsulting.formation.persistence.FilePersistenceService;
+import fr.keyconsulting.formation.service.PersistenceService;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,16 +33,26 @@ public class Controller implements Initializable {
 
 	@FXML
 	private TextArea result;
+	
+	
 
 	@FXML
 	private TableView<Calcul> tableView;
 
 	@FXML
 	private TableColumn<Calcul, LocalDateTime> time;
+	
+	PersistenceService service;
 
 	public void initialize(URL location, ResourceBundle resources) {
 		operator.setItems(FXCollections.observableArrayList(Operators.all()));
-		tableView.setItems(FXCollections.observableArrayList());
+		service = new FilePersistenceService();
+		List<Calcul> loadedCalculs = service.load();
+		if (loadedCalculs == null || loadedCalculs.isEmpty()) {
+			tableView.setItems(FXCollections.observableArrayList());
+		}else{
+			tableView.setItems(FXCollections.observableArrayList(loadedCalculs));
+		}
 		time.setCellFactory(new DateTimeCellFactory<Calcul>());
 	}
 
@@ -47,6 +60,7 @@ public class Controller implements Initializable {
 		Calcul calcul = new Calcul(new Operand(leftOperand.getText()), Operators.of(operator.getValue()),
 				new Operand(rightOperand.getText()));
 		tableView.getItems().add(calcul);
+		service.persist(calcul);
 		result.setText(calcul.execute().getValue().toPlainString());
 	}
 

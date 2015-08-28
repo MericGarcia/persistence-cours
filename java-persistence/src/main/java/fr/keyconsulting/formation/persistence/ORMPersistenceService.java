@@ -31,6 +31,7 @@ public class ORMPersistenceService implements PersistenceService{
 		em.getTransaction().commit();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Calcul> load() {	
 		Query query = em.createQuery("SELECT c FROM Calcul c");

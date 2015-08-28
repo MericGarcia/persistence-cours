@@ -54,15 +54,35 @@ public class JDBCPersistenceService implements PersistenceService {
 
 	private void insertQuery(Calcul calcul) throws SQLException {
 		Statement stmt = null;
+		String lOp = calcul.getLeftOperand().getValue().toString();
+		String op = calcul.getOperator().getCode();
+		String rOp = calcul.getRightOperand().getValue().toString();
+		String time = calcul.getTime().format(DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss"));
+
+		String query = "insert into CALCUL " + "(rightOperand,operator,leftOperand,time) " + "VALUES ('" + lOp + "','"
+				+ op + "','" + rOp + "'," + "to_date('" + time + "', 'yyyy-mm-dd hh24:mi:ss'))";
+
 		stmt = dbHandler.getConnection().createStatement();
-		String query = null;
-		
-		/*
-		 * create insert query
-		 * 
-		 * */
 		
 		stmt.executeUpdate(query);
+	}
+
+	private List<Calcul> selectAllQuery() throws SQLException {
+		List<Calcul> calculs = new ArrayList<>();
+		Statement stmt = null;
+
+		String query = "select rightOperand,operator,leftOperand,time from CALCUL";
+
+		stmt = dbHandler.getConnection().createStatement();
+		ResultSet rs = stmt.executeQuery(query);
+		while (rs.next()) {
+			Operand leftOperand = new Operand(rs.getBigDecimal("leftOperand"));
+			Operator operator = Operators.of(rs.getString("operator"));
+			Operand rightOperand = new Operand(rs.getBigDecimal("rightOperand"));
+			LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
+			calculs.add(new Calcul(leftOperand, operator, rightOperand, time));
+		}
+		return calculs;
 	}
 
 	@Override
@@ -70,6 +90,7 @@ public class JDBCPersistenceService implements PersistenceService {
 		List<Calcul> result = Collections.emptyList();
 		try {
 			dbHandler.connect(USER, PASSWORD);
+			dbHandler.getConnection().createStatement();
 			result = selectAllQuery();
 			dbHandler.disconnect();
 		} catch (SQLException e) {
@@ -84,25 +105,4 @@ public class JDBCPersistenceService implements PersistenceService {
 		return result;
 	}
 
-	private List<Calcul> selectAllQuery() throws SQLException {
-		List<Calcul> calculs = new ArrayList<>();
-		Statement stmt = null;
-		String query = null;
-		
-		/*
-		 * create select query
-		 * 
-		 * */
-		
-		stmt = dbHandler.getConnection().createStatement();
-		ResultSet rs = stmt.executeQuery(query);
-		
-		/*
-		 * treat result set
-		 * 
-		 * */
-		
-		return calculs;
-	}
-	
 }

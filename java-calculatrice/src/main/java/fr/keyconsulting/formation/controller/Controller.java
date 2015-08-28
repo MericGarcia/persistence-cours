@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 import fr.keyconsulting.formation.model.Calcul;
 import fr.keyconsulting.formation.model.Operand;
 import fr.keyconsulting.formation.model.Operators;
-import fr.keyconsulting.formation.persistence.FilePersistenceService;
+import fr.keyconsulting.formation.persistence.JDBCPersistenceService;
 import fr.keyconsulting.formation.service.PersistenceService;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -46,7 +46,7 @@ public class Controller implements Initializable {
 
 	public void initialize(URL location, ResourceBundle resources) {
 		operator.setItems(FXCollections.observableArrayList(Operators.all()));
-		service = new FilePersistenceService();
+		service = new JDBCPersistenceService();
 		List<Calcul> loadedCalculs = service.load();
 		if (loadedCalculs == null || loadedCalculs.isEmpty()) {
 			tableView.setItems(FXCollections.observableArrayList());

@@ -36,20 +36,31 @@ public class Calcul implements Serializable, ICalcul {
 	@Attribute
 	LocalDateTime time;
 
+	String commentary;
+
 	public Calcul() {
 		this(null, null, null);
 	}
-
+	
 	public Calcul(Operand leftOperand, Operator operator, Operand rightOperand) {
-		this(leftOperand, operator, rightOperand, LocalDateTime.now());
+		this(leftOperand, operator, rightOperand, LocalDateTime.now(), null);
 	}
 
+	public Calcul(Operand leftOperand, Operator operator, Operand rightOperand, String commentary) {
+		this(leftOperand, operator, rightOperand, LocalDateTime.now(), commentary);
+	}
+	
 	public Calcul(Operand leftOperand, Operator operator, Operand rightOperand, LocalDateTime time) {
+		this(leftOperand, operator, rightOperand, time, null);
+	}
+
+	public Calcul(Operand leftOperand, Operator operator, Operand rightOperand, LocalDateTime time, String commentary) {
 		super();
 		this.leftOperand = leftOperand;
 		this.rightOperand = rightOperand;
 		this.operator = operator;
 		this.time = time;
+		this.commentary = commentary;
 	}
 
 	public Result execute() {		
@@ -71,11 +82,7 @@ public class Calcul implements Serializable, ICalcul {
 	}
 
 	public String getCalculAsString() {
-		StringJoiner sj = new StringJoiner(" ");
-		sj.add(leftOperand.getValue().toString());
-		sj.add(operator.getCode());
-		sj.add(rightOperand.getValue().toString());
-		return sj.toString();
+		return commentary;
 	}
 
 	public Operand getLeftOperand() {
@@ -106,4 +113,13 @@ public class Calcul implements Serializable, ICalcul {
 		this.time = time;
 	}	
 
+
+	public String getCommentary() {
+		return commentary;
+	}
+
+	public void setCommentary(String commentary) {
+		this.commentary = commentary;
+	}
+	
 }

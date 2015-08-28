@@ -58,9 +58,10 @@ public class JDBCPersistenceService implements PersistenceService {
 		String op = calcul.getOperator().getCode();
 		String rOp = calcul.getRightOperand().getValue().toString();
 		String time = calcul.getTime().format(DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss"));
+		String commentary = calcul.getCommentary();
 
-		String query = "insert into CALCUL " + "(rightOperand,operator,leftOperand,time) " + "VALUES ('" + lOp + "','"
-				+ op + "','" + rOp + "'," + "to_date('" + time + "', 'yyyy-mm-dd hh24:mi:ss'))";
+		String query = "insert into CALCUL " + "(rightOperand,operator,leftOperand,time,commentary) " + "VALUES ('" + lOp + "','"
+				+ op + "','" + rOp + "'," + "to_date('" + time + "', 'yyyy-mm-dd hh24:mi:ss'),'"+commentary+"')";
 
 		stmt = dbHandler.getConnection().createStatement();
 		
@@ -71,7 +72,7 @@ public class JDBCPersistenceService implements PersistenceService {
 		List<Calcul> calculs = new ArrayList<>();
 		Statement stmt = null;
 
-		String query = "select rightOperand,operator,leftOperand,time from CALCUL";
+		String query = "select rightOperand,operator,leftOperand,time,commentary from CALCUL";
 
 		stmt = dbHandler.getConnection().createStatement();
 		ResultSet rs = stmt.executeQuery(query);
@@ -80,7 +81,8 @@ public class JDBCPersistenceService implements PersistenceService {
 			Operator operator = Operators.of(rs.getString("operator"));
 			Operand rightOperand = new Operand(rs.getBigDecimal("rightOperand"));
 			LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
-			calculs.add(new Calcul(leftOperand, operator, rightOperand, time));
+			String commentary = rs.getString("commentary");
+			calculs.add(new Calcul(leftOperand, operator, rightOperand, time,commentary));
 		}
 		return calculs;
 	}

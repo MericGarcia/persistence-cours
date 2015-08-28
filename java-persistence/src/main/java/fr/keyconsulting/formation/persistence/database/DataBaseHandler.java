@@ -4,15 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import org.apache.log4j.Logger;
-
 public class DataBaseHandler {
 	
-	private String driverClassName;
 	private String dbURL;
 	private static DataBaseHandler instanceUnique;
 	private Connection connection;
-	private Logger log;
+
 	
 	/**
 	 * Retourne de l'instance unique.
@@ -29,14 +26,11 @@ public class DataBaseHandler {
 	 */
 	protected DataBaseHandler() {
 		this.connection = null;
-		this.driverClassName = null;
 		this.dbURL = null;
-		this.log = Logger.getLogger(this.getClass());
 	}
 
 	public void init(String driver, String url) throws ClassNotFoundException {
 		Class.forName(driver);
-		this.driverClassName = driver;
 		this.dbURL = url;
 	}
 	

@@ -57,7 +57,8 @@ public class Calcul implements Serializable, ICalcul {
 			throw new IllegalStateException("No operator specified");
 		}
 		Result result = new Result(operator.operate(leftOperand, rightOperand));
-		time = LocalDateTime.now();
+		//time = LocalDateTime.now();
+		time = TimeManager.getInstance().getCurrentDate();
 		return result;
 	}
 

@@ -17,5 +17,15 @@
  <bean name="calcul" scope="prototype" class="fr.keyconsulting.formation.control.calc.ViewCalculCtrl" >
  	<!-- <constructor-arg index="0" type="fr.keyconsulting.formation.control.app.IApplicationCtrl" ref="appCtrl"></constructor-arg> --> 	
  </bean>
+ 
+  <bean id="timeManagerMBean" class="fr.keyconsulting.formation.control.time.TimeManagerMBean" />
+  
+  <bean id="exporter" class="org.springframework.jmx.export.MBeanExporter" lazy-init="false">
+	<property name="beans">
+	  <map>
+		<entry key="beans:name=calc.TimeManager" value-ref="timeManagerMBean"/>
+	  </map>
+	</property>
+ </bean>
 
 </beans>

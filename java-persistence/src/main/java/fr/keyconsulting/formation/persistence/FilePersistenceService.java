@@ -50,23 +50,11 @@ public class FilePersistenceService implements PersistenceService {
 	}
 	
 	public void persist(Calcul calcul){
-		StringJoiner sj = new StringJoiner(";");
-		sj.add(calcul.getLeftOperand().getValue().toString());
-		sj.add(calcul.getOperator().getCode());
-		sj.add(calcul.getRightOperand().getValue().toString());
-		sj.add(calcul.getTime().format(DateTimeFormatter.ISO_DATE_TIME));
-		try {
-			bw.write(sj.toString());
-			bw.newLine();
-			bw.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		
 	}
 	
 	public List<Calcul> load(){
-		return br.lines().map( new CsvLineToCalculMapper()).collect(Collectors.toList());
+		return null;
 	}
 
 }

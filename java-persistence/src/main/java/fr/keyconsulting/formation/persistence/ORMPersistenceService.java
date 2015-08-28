@@ -24,17 +24,17 @@ public class ORMPersistenceService implements PersistenceService{
 	@Override
 	public void persist(Calcul calcul) {
 		em.getTransaction().begin();
-		if(em.find(Calcul.class, calcul.getId()) != null){
-			em.merge(calcul);
-		}
-		em.persist(calcul);
+		/*
+		 * Use entitymanager to persist the new calcul
+		 * 
+		 * */
 		em.getTransaction().commit();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Calcul> load() {	
-		Query query = em.createQuery("SELECT c FROM Calcul c");
+		Query query = em.createQuery("");  // write HQL query for selecting all calculs
 		List<Calcul> calculs = query.getResultList();
 		return calculs;
 	}

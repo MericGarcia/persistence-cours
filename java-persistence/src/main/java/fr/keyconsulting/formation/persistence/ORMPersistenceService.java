@@ -5,7 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 
 import fr.keyconsulting.formation.model.Calcul;
 import fr.keyconsulting.formation.service.PersistenceService;
@@ -34,8 +36,9 @@ public class ORMPersistenceService implements PersistenceService{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Calcul> load() {	
-		Query query = em.createQuery("SELECT c FROM Calcul c");
-		List<Calcul> calculs = query.getResultList();
+		Session session = em.unwrap(Session.class);
+		Criteria crit = session.createCriteria(Calcul.class);
+		List<Calcul> calculs = crit.list();
 		return calculs;
 	}
 	

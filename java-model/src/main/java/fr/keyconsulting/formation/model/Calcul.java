@@ -36,6 +36,7 @@ public class Calcul implements Serializable, ICalcul {
 	@Attribute
 	LocalDateTime time;
 
+	@Attribute
 	String commentary;
 
 	public Calcul() {

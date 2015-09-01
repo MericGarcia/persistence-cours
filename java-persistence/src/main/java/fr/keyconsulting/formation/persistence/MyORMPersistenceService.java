@@ -57,21 +57,23 @@ public class MyORMPersistenceService implements PersistenceService {
 
 	private void insertQuery(Calcul calcul) throws SQLException {
 		PreparedStatement statement = null;
-		String sql = null;
 
-		/*
-		 * 
-		 * Create sql query using reflection tools
-		 * 
-		 * */
+		StringJoiner columns = new StringJoiner(",");
+		StringJoiner values = new StringJoiner(",");
+		
+		for (Field column : DBUtils.getFields(calcul)) {
+			columns.add(column.getName());
+			values.add("?");
+		}
+
+		String sql = INSERT.replace(":table", calcul.getClass().getSimpleName()).replace(":columns", columns.toString())
+				.replace(":values", values.toString());
 
 		statement = dbHandler.getConnection().prepareStatement(sql);
-		
-		/*
-		 * 
-		 * update prepared statement using reflection tools
-		 * 
-		 * */	
+		int i = 1;
+		for (Field column : DBUtils.getFields(calcul)) {
+			DBUtils.setColunmValue(statement, calcul, column.getName(), i++);
+		}		
 
 		statement.executeUpdate();
 	}
@@ -80,25 +82,14 @@ public class MyORMPersistenceService implements PersistenceService {
 		List<Calcul> calculs = new ArrayList<>();
 		Statement stmt = null;
 
-		String query = null;
+		String query = SELECT.replace(":table", table);
 
-		
-		/*
-		 * 
-		 * Create sql query using reflection tools
-		 * 
-		 * */
-		
 		stmt = dbHandler.getConnection().createStatement();
 		ResultSet rs = stmt.executeQuery(query);
 		
 		while (rs.next()) {
 			Calcul calcul = new Calcul();
-			/*
-			 * 
-			 * Update calcul object using reflection tool
-			 * 
-			 * */
+			DBUtils.populateObject(calcul, rs);
 			calculs.add(calcul);
 		}
 		

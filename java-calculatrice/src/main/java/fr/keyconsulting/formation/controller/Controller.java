@@ -36,6 +36,9 @@ public class Controller implements Initializable {
 	
 	@FXML
 	private TextField commentary;
+	
+	@FXML
+	private TextField author;
 
 	@FXML
 	private TableView<Calcul> tableView;
@@ -60,6 +63,7 @@ public class Controller implements Initializable {
 	public void run(ActionEvent event) {
 		Calcul calcul = new Calcul(new Operand(leftOperand.getText()), Operators.of(operator.getValue()),
 				new Operand(rightOperand.getText()), commentary.getText());
+		calcul.setAuthor(author.getText());
 		tableView.getItems().add(calcul);
 		service.persist(calcul);
 		result.setText(calcul.execute().getValue().toPlainString());

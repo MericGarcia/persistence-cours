@@ -70,6 +70,23 @@
 				</HBox>
 				<HBox>
 					<children>
+						<Label prefHeight="16.0" prefWidth="80.0" text="Author :">
+							<padding>
+								<Insets left="10.0" />
+							</padding>
+						</Label>
+						<TextField fx:id="author" prefWidth="220.0">
+							<HBox.margin>
+								<Insets left="10.0" right="10.0" />
+							</HBox.margin>
+						</TextField>
+					</children>
+					<padding>
+						<Insets left="10.0" top="10.0" />
+					</padding>
+				</HBox>
+				<HBox>
+					<children>
 						<Button mnemonicParsing="false" onAction="#run" text="Lancer" />
 					</children>
 					<padding>

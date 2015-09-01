@@ -38,6 +38,9 @@ public class Calcul implements Serializable, ICalcul {
 
 	@Attribute
 	String commentary;
+	
+	@Attribute
+	String author;
 
 	public Calcul() {
 		this(null, null, null);
@@ -83,7 +86,10 @@ public class Calcul implements Serializable, ICalcul {
 	}
 
 	public String getCalculAsString() {
-		return commentary;
+		StringJoiner sj = new StringJoiner(" - ");
+		sj.add(author);
+		sj.add(commentary);
+		return sj.toString();
 	}
 
 	public Operand getLeftOperand() {
@@ -121,6 +127,15 @@ public class Calcul implements Serializable, ICalcul {
 
 	public void setCommentary(String commentary) {
 		this.commentary = commentary;
+	}
+	
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 	
 }
